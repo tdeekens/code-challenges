@@ -77,12 +77,14 @@
      * @param error callback called after failing reading the input.
      */
     Processer.prototype.read = function(success, error) {
-        fs.readFile(this.filePath, 'utf8', function(err, data) {
-            if (err) { typeof error === 'function' && error(); }
-            else     {
-                this.fileContents = data;
+        var that = this;
 
-                typeof success === 'function' && success();
+        fs.readFile(this.filePath, 'utf8', function(err, data) {
+            if (err) { typeof error === 'function' && error.call(that); }
+            else     {
+                that.fileContents = data;
+
+                typeof success === 'function' && success.call(that);
             }
         });
     };
@@ -104,13 +106,9 @@
                     var numberChunkSize = input.shift();
                     var phoneNumbers    = input.splice(0, numberChunkSize);
 
-                    console.log(phoneNumbers);
-
                     //Construct and build a tree
                     var trie = new Trie(phoneNumbers);
                     trie.build();
-
-                    console.log(trie.stringify());
 
                     //Finally we get to ouput something...
                     if (trie.doubledPath === true) {
