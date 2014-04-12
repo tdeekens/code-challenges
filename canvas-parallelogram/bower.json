@@ -1,6 +1,8 @@
 {
   "name": "canvas-parallelogram",
   "version": "0.0.1",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "foundation": "~5.2.2"
   }
 }
