@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="bower/foundation/css/foundation.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/main.css">
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -17,9 +18,9 @@
         <nav class="top-bar" data-topbar>
             <ul class="title-area">
                 <li class="name">
-                <h1>
-                    <a href="#">Canvas Parallelogram</a>
-                </h1>
+                    <h1>
+                        <a href="#">Canvas Parallelogram</a>
+                    </h1>
                 </li>
                 <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
             </ul>
@@ -28,26 +29,42 @@
         </nav>
 
         <div class="row">
-            <div class="large-12 columns">
+            <div class="row">
+                <div class="large-12 columns"><hr />
+                    <ul class="button-group radius">
+                        <li><a id="js--start-over" href="#" class="button alert">Start over</a></li>
+                    </ul>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="large-12 columns">
+                    <canvas id="drawing-canvas" class="panel callout radius"></canvas>
+                </div>
             </div>
         </div>
 
         <footer class="row">
-            <div class="large-12 columns"><hr />
-                <div class="row">
+            <div class="large-6 columns">
+                <p>&copy; none. Take it or leave it!</p>
+            </div>
 
-                <div class="large-6 columns">
-                    <p>&copy; none. Take it or leave it!</p>
-                </div>
+            <div class="large-6 columns">
+                <ul class="inline-list right">
+                    <li><a href="#" data-reveal-id="about-modal" class="">About</a></li>
+                </ul>
+            </div>
 
-                <div class="large-6 columns">
-                    <ul class="inline-list right">
-                    </ul>
-                </div>
+            <div id="about-modal" class="reveal-modal" data-reveal>
+                <h2>Made with <3!</h2>
 
-              </div>
-          </div>
+                <p class="lead">I am Tobi...</p>
+                <p>
+                    sitting in Göteborg, finishing a MSc degree and solving code challenges along the way.
+                </p>
+
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
         </footer>
 
         <script src="bower/modernizr/modernizr.js"></script>
