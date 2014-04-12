@@ -1,3 +1,7 @@
 #drawing-canvas {
    width: 100%;
 }
+
+#info-bar {
+   display: none;
+}

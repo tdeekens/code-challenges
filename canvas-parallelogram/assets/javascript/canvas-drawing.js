@@ -2,9 +2,11 @@
     root = root || this;
 
     var
-        config             = {
+        config = {
             canvasEl: '#drawing-canvas',
+            msgEl: '#info-bar'
         },
+        ctx = null,
 
     CanvasDrawing = function(obj) {
         // If already instance return
@@ -18,8 +20,21 @@
 
     _initDom = function() {
         $(function() {
-            config.$canvasEl = $(config.canvasEl);
+            config.$canvasEl = $(config.canvasEl).get(0);
+            config.$msgEl = $(config.msgEl);
+
+            _initCanvas();
         });
+    },
+
+    _initCanvas = function() {
+        config.isCanvasSupported = config.$canvasEl.getContext;
+
+        if (config.isCanvasSupported) {
+            ctx = config.$canvasEl.getContext("2d");
+        } else {
+            config.$msgEl.fadeIn().html( config.$msgEl.data('nosupport') );
+        }
     },
 
     // Any call to subordinate initialization function goes here
@@ -34,7 +49,7 @@
     root.CanvasDrawing = CanvasDrawing;
 
     // Version of our library
-    CanvasDrawing.VERSION   = '0.0.1';
+    CanvasDrawing.VERSION = '0.0.1';
 
     // Support for AMD/RequireJS
     // If define function deefined and its amd
