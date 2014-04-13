@@ -1,5 +1,8 @@
 #drawing-canvas {
-   width: 100%;
+   width: 800px;
+   height: 600px;
+   background: #ECFAFF;
+   border: 1px solid #B6EFFF;
 }
 
 #info-bar {
