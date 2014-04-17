@@ -1,0 +1,15 @@
+{
+  "name": "MSc-Interaction-Grids",
+  "version": "0.0.1",
+  "description": "Interaction Grids from MSc project",
+  "main": "assets/javascript/node-main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "circumcenter": "0.0.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Anna Averianova & Tobias Deekens",
+  "license": "MIT"
+}

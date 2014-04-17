@@ -1,0 +1,14 @@
+{
+  "name": "canvas-parallelogram",
+  "version": "0.0.1",
+  "description": "A little drawing canvas messing with triangles.",
+  "main": "assets/js/node-main.js",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Tobias Deekens",
+  "license": "MIT"
+}
