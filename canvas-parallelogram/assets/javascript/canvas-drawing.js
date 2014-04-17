@@ -378,15 +378,15 @@
             half = CanvasDrawing.geometry.midpoint(coords[ over[0] ], coords[ over[1] ]);
 
         // Calcucate distances of from to half's position and some locational meta info
-        var isUnderY = flip.y === Math.max(coords.A.y, coords.B.y, flip.y),
-            isRightH = flip.x === Math.max(half.x, flip.x),
+        var isUnderHalf = flip.y === Math.max(half.y, flip.y),
+            isRightOfHalf = flip.x === Math.max(half.x, flip.x),
             distanceXC = CanvasDrawing.geometry.axisDistance(flip.x, half.x),
             distanceYC = CanvasDrawing.geometry.axisDistance(flip.y, half.y);
 
         // Construct the flipped coord and give half's position and start/end
         return {
-            x: isRightH ? half.x - distanceXC : half.x + distanceXC,
-            y: isUnderY ? half.y - distanceYC : half.y + distanceYC,
+            x: isRightOfHalf ? half.x - distanceXC : half.x + distanceXC,
+            y: isUnderHalf ? half.y - distanceYC : half.y + distanceYC,
             to: [coords[ over[0] ], coords[ over[1] ]],
             half: half
         };
@@ -413,7 +413,7 @@
         }
 
         coords.max = {
-            distance: Math.max(coords.A.to.B, coords.A.to.C, coords.B.C)
+            distance: Math.max(coords.A.to.B, coords.A.to.C, coords.B.to.C)
         }
 
         // Detects the longest side to accordingly flip the independent coord
