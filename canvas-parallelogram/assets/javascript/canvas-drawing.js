@@ -27,9 +27,6 @@
         ctx = null,
         npm = {};
 
-    // using dependency from npm with browserify
-    npm.circumcenter = require("circumcenter");
-
     // constructor of module
     CanvasDrawing = function(obj) {
         // If already instance return
@@ -206,9 +203,9 @@
 
         // Selected three coords, draw geometric shapes now
         if (state.clicks.length === 3) {
-            CanvasDrawing.ui.drawTriangle();
-            CanvasDrawing.ui.drawCirumCircle();
+            //CanvasDrawing.ui.drawTriangle();
             CanvasDrawing.ui.drawParallelogram();
+            CanvasDrawing.ui.drawCirumCircle();
         }
 
         return true;
@@ -253,7 +250,7 @@
     // Draws the cirum circle
     CanvasDrawing.ui.drawCirumCircle = function() {
         // Calculate the cc and raduius' location
-        var CC = CanvasDrawing.geometry.circumcenter(state.clicks[0], state.clicks[1], state.clicks[2]);
+        var CC = CanvasDrawing.geometry.circumcenter(state.clicks[0], state.clicks[1], state.clicks[2], state.mCoord);
         var CR = CanvasDrawing.geometry.distance(CC, state.clicks[0]);
 
         ctx.fillStyle = config.circle.colorCircum;
@@ -277,7 +274,7 @@
     // Draws the parallelogram
     CanvasDrawing.ui.drawParallelogram = function() {
         // Get the mirrored point of the longest side
-        var mCoord = CanvasDrawing.geometry.mirrorOfLongestSide(state.clicks[0], state.clicks[1], state.clicks[2]);
+        state.mCoord = CanvasDrawing.geometry.mirrorOfLongestSide(state.clicks[0], state.clicks[1], state.clicks[2]);
         drawPoint = function(coord) {
             ctx.fillStyle = config.circle.colorParallelogram;
 
@@ -288,19 +285,25 @@
             ctx.fill();
         };
 
-        drawPoint(mCoord);
-        drawPoint(mCoord.half);
+        drawPoint(state.mCoord);
+        //drawPoint(mCoord.half);
 
         ctx.lineWidth = 1;
         ctx.strokeStyle = config.circle.colorParallelogram;
 
         ctx.beginPath();
 
-        ctx.moveTo(mCoord.x, mCoord.y);
-        ctx.lineTo(mCoord.to[0].x, mCoord.to[0].y);
+        ctx.moveTo(state.mCoord.x, state.mCoord.y);
+        ctx.lineTo(state.mCoord.to[0].x, state.mCoord.to[0].y);
 
-        ctx.moveTo(mCoord.x, mCoord.y);
-        ctx.lineTo(mCoord.to[1].x, mCoord.to[1].y);
+        ctx.moveTo(state.mCoord.x, state.mCoord.y);
+        ctx.lineTo(state.mCoord.to[1].x, state.mCoord.to[1].y);
+
+        ctx.moveTo(state.mCoord.to[1].x, state.mCoord.to[1].y);
+        ctx.lineTo(state.mCoord.to[2].x, state.mCoord.to[2].y);
+
+        ctx.moveTo(state.mCoord.to[2].x, state.mCoord.to[2].y);
+        ctx.lineTo(state.mCoord.to[0].x, state.mCoord.to[0].y);
 
         ctx.closePath();
         ctx.stroke();
@@ -343,17 +346,12 @@
     };
 
     // Calculates the coord of the circumcenter
-    CanvasDrawing.geometry.circumcenter = function(coordA, coordB, coordC) {
-        var
-            A = [Math.round(coordA.x), Math.round(coordA.y)],
-            B = [Math.round(coordB.x), Math.round(coordB.y)],
-            C = [Math.round(coordC.x), Math.round(coordC.y)];
-
-        var CC = npm.circumcenter([A, B, C]);
+    CanvasDrawing.geometry.circumcenter = function(coordA, coordB, coordC, coordD) {
+        var centroid = CanvasDrawing.geometry.midpoint( CanvasDrawing.geometry.midpoint(coordA, coordB), CanvasDrawing.geometry.midpoint(coordC, coordD) );
 
         return {
-            x: Math.round(CC[0]),
-            y: Math.round(CC[1])
+            x: centroid.x,
+            y: centroid.y
         }
     };
 
@@ -373,8 +371,7 @@
     // Mirrors a coord over a given longest side
     CanvasDrawing.geometry.mirrorCoord = function(coords, from , over) {
         // Get the root and the half of the longest side
-        var
-            flip = coords[ from ],
+        var flip = coords[ from ],
             half = CanvasDrawing.geometry.midpoint(coords[ over[0] ], coords[ over[1] ]);
 
         // Calcucate distances of from to half's position and some locational meta info
@@ -387,7 +384,7 @@
         return {
             x: isRightOfHalf ? half.x - distanceXC : half.x + distanceXC,
             y: isUnderHalf ? half.y - distanceYC : half.y + distanceYC,
-            to: [coords[ over[0] ], coords[ over[1] ]],
+            to: [coords[ over[0] ], coords[ over[1] ], coords[ from ] ],
             half: half
         };
     };

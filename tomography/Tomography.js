@@ -134,9 +134,24 @@
             return false;
         };
 
+        var columnLength = parsed.columnSums.length,
+            rowLength    = parsed.rowSums.length,
+            length       = 0,
+            index        = null;
+
+        if (columnLength > rowLength) {
+            length = rowLength;
+            longest = parsed.columnSums;
+            shortest = parsed.rowSums;
+        } else {
+            length = columnLength;
+            longest = parsed.rowSums;
+            shortest = parsed.columnSums;
+        }
+
         // Iterate columns and try to substract
-        for (var i = 0, size = parsed.columnSums.length; i < size; i++) {
-            if ( ! substract(parsed.rowSums, parsed.columnSums[i]) ) {
+        for (var i = 0; i < length; i++) {
+            if ( ! substract(longest, shortest[i]) ) {
                 return false;
             }
         };
@@ -148,5 +163,8 @@
    processor.isValid();
 
    var processor = new Processer('tomography2.in');
+   processor.isValid();
+
+   var processor = new Processer('tomography3.in');
    processor.isValid();
 }();

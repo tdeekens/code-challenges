@@ -5,7 +5,7 @@
   "main": "assets/javascript/node-main.js",
   "dependencies": {},
   "devDependencies": {
-    "circumcenter": "0.0.0"
+
   },
   "scripts": {
     "test": "test"

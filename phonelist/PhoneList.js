@@ -112,9 +112,9 @@
 
                     //Finally we get to ouput something...
                     if (trie.doubledPath === true) {
-                        console.log("YES");
-                    } else {
                         console.log("NO");
+                    } else {
+                        console.log("YES");
                     }
                 }
             },
