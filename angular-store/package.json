@@ -1,0 +1,15 @@
+{
+  "name": "angular-store",
+  "version": "0.0.0",
+  "description": "Sample store build with angular for learning purposes.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.8.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tobias Deekens",
+  "license": "MIT"
+}
