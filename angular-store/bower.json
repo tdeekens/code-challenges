@@ -1,0 +1,22 @@
+{
+  "name": "angular-store",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tdeekens/code-challenges",
+  "authors": [
+    "Tobias Deekens <nerd@tdeekens.name>"
+  ],
+  "description": "Sample store build with angular for learning purposes.",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-sass-official": "~3.2.0+1",
+    "angular": "~1.2.21"
+  }
+}
