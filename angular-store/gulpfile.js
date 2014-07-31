@@ -41,17 +41,17 @@ gulp.task('images', function () {
     .pipe($.size({title: 'images'}));
 });
 
-gulp.task('styles:scss', function () {
+gulp.task('styles', function () {
   return gulp.src(['stylesheets/**/*.scss'])
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
-      loadPath: ['stylesheets']
+      loadPath: ['stylesheets', 'libs', 'libs/bootstrap-sass-official/assets/stylesheets/']
     }))
     .on('error', console.error.bind(console))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest('.tmp/styles'))
-    .pipe($.size({title: 'styles:scss'}));
+    .pipe($.size({title: 'styles'}));
 });
 
 // Clean Output Directory
