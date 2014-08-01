@@ -1,1 +1,18 @@
+$grid-columns:              12;
+$grid-gutter-width:         30px;
+$grid-float-breakpoint:     768px;
+
 @import "bootstrap";
+
+.store-viewport, .item-viewport {
+  @include make-row();
+}
+
+.store-body {
+   @include make-xs-column(4);
+   @include make-xs-column-offset(1);
+
+   header {
+      text-align: center;   
+   }
+}

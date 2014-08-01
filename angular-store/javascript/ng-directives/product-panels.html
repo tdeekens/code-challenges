@@ -1,0 +1,86 @@
+<section>
+   <ul class="nav nav-pills">
+      <li ng-class="{ active : panel.isSelected(1) }">
+         <a ng-click="panel.selectTab(1)" href="">Description</a>
+      </li>
+      <li ng-class="{ active : panel.isSelected(2) }">
+         <a ng-click="panel.selectTab(2)" href="">Specifications</a>
+      </li>
+      <li ng-class="{ active : panel.isSelected(3) }">
+         <a ng-click="panel.selectTab(3)" href="">Reviews</a>
+      </li>
+   </ul>
+
+   <div ng-show="panel.isSelected(1)" class="panel">
+      <h4>Decription</h4>
+      <p> {{ product.desciption }} </p>
+   </div>
+   <div ng-show="panel.isSelected(2)" class="panel">
+      <h4>Specifications</h4>
+      <blockquote>None yet</blockquote>
+   </div>
+   <div ng-show="panel.isSelected(3)" class="panel">
+      <h4>Reviews</h4>
+      <blockquote ng-repeat="review in product.reviews">
+         <b>Stars: {{ review.stars }}</b>
+         {{ review.body }}
+         <footer><cite>by: {{ review.author }}</cite></footer>
+      </blockquote>
+
+      <form name="reviewform"
+            ng-controller="ReviewController as reviewController"
+            ng-submit="reviewform.$valid && reviewController.addReview(product)"
+            class="form-horizontal review-form"
+            role="form" novalidate>
+
+         <blockquote>
+            <b>Stars: {{ review.stars }}</b>
+            {{ review.body }}
+            <footer><cite>by: {{ review.author }}</cite></footer>
+         </blockquote>
+
+         <div class="form-group">
+            <label for="stars" class="col-sm-2 control-label">Stars</label>
+            <div class="col-sm-10">
+               <select ng-model="review.stars"
+                       name="stars" class="form-control" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+               </select>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label for="body" class="col-sm-2 control-label">Review</label>
+            <div class="col-sm-10">
+               <textarea ng-model="review.body"
+                         name="body" class="form-control" rows="3" required></textarea>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">by</label>
+            <div class="col-sm-10">
+               <input ng-model="review.author"
+                      type="email" class="form-control" required>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+               Your review is <strong>not</strong> ready for submission!
+               {{ reviewform.$valid }}
+            </div>
+         </div>
+
+         <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+               <button type="submit" class="btn btn-default">Review this!</button>
+            </div>
+         </div>
+      </form>
+   </div>
+</section>

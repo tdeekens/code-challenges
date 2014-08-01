@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="store">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +13,30 @@
     <script src="libs/angular/angular.min.js"></script>
   </head>
   <body>
+    <div class="store-viewport">
+       <div class="store-body">
+          <header>
+             <h1>An Gem Store</h1>
+             <h2>- with a bit of angular messin' -</h2>
+          </header>
+
+          <div class="item-viewport" ng-controller="StoreController as store">
+            <ul class="list-group">
+               <li class="list-item"
+                   ng-repeat="product in store.products | orderBy:'-price'" ng-hide="product.soldOut">
+
+                  <product-title></product-title>
+
+                  <product-image></product-image>
+
+                  <product-panels></product-panels>
+               </li>
+            </div>
+         </div>
+       </div>
+    </div>
+
     <script src="javascript/application.js"></script>
+    <script src="javascript/ng-modules/store-products.js"></script>
   </body>
 </html>

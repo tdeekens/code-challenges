@@ -50,7 +50,7 @@ gulp.task('styles', function () {
     }))
     .on('error', console.error.bind(console))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-    .pipe(gulp.dest('.tmp/styles'))
+    .pipe(gulp.dest('stylesheets'))
     .pipe($.size({title: 'styles'}));
 });
 
@@ -67,7 +67,7 @@ gulp.task('serve', function () {
   });
 
   gulp.watch(['**/*.html'], reload);
-  gulp.watch(['stylesheets/**/*.scss'], ['styles:scss']);
+  gulp.watch(['stylesheets/**/*.scss'], ['styles']);
   gulp.watch(['javascript/**/*.js'], ['jshint']);
   gulp.watch(['images/**/*'], reload);
 });
