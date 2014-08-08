@@ -1,0 +1,14 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+  <Tobias Deekens> -- <Developer> -- <tdeekens>
+
+# THANKS
+
+  <Open Source>
+
+# TECHNOLOGY COLOPHON
+
+  HTML5, CSS3
